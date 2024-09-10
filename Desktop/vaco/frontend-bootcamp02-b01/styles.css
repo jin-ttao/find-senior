@@ -1,0 +1,35 @@
+@import "./reset.css";
+
+body {
+    margin: 50px;
+}
+
+header {
+    padding: 20px 0;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+#userInput {
+    display: flex;
+    gap: 20px;
+}
+
+main {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.user-info > p {
+    font-size: 15px;
+    padding: 10px;
+    border: 1px solid;
+}
+
+.user-info {
+    font-size: 15px;
+}
