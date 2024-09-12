@@ -2,7 +2,7 @@ const inputNumbers = document.querySelector("#userInputNumbers");
 const inputNumbersButton = document.querySelector("#userInputNumbersButton");
 const graphBoxs = document.querySelectorAll(".graphBox");
 
-const numbersArr = [];
+let numbersArr = [];
 
 const saveNumbers = function () {
   numbersArr = inputNumbers.value.split(',').map((num) => {
@@ -34,65 +34,80 @@ const renderNumberGraph = function (array) {
 inputNumbersButton.addEventListener("click", saveNumbers);
 
 
-let element1 = document.getElementById("graphBox1"); // 받아와야 하는 데이터 - 비교 인덱스
-let element2 = document.getElementById("graphBoxB"); // 받아와야 하는 데이터 - 현재 인덱스
+let element1 = document.getElementById("graphBox1");
+let element2 = document.getElementById("graphBoxB");
 let element3 = document.getElementById("graphBoxC");
-let animationId = null; // 중복 이벤트 방지, test용 코드
-let yPos = 0; // y 시작 좌표
-let xPos = 0; // x(비교 인덱스) 시작 좌표
-let posNum = 2; // y 애니메이션 이동 범위
+let animationId = null;
+let yPos = 0;
+let xPos = 0;
+let posNum = 2;
 
-function checkTargets() {
-  // 하이라이트
-    element3.classList.toggle("colorDefault");
-    element2.classList.toggle("colorDefault");
-    element3.classList.toggle("colorCurrent");
-    element2.classList.toggle("colorCompare");
+function checkTargets(currentIndex, compareIndex, isFixed) {
+  if (!isFixed) {
+    graphBoxs[currentIndex].classList.toggle("colorDefault");
+    graphBoxs[compareIndex].classList.toggle("colorDefault");
+    graphBoxs[currentIndex].classList.toggle("colorCurrent");
+    graphBoxs[compareIndex].classList.toggle("colorCompare");
+    return;
+  }
+  graphBoxs[currentIndex].classList.toggle("colorDefault");
+  graphBoxs[compareIndex].classList.toggle("colorDefault");
+  graphBoxs[currentIndex].classList.toggle("colorCurrent");
+  graphBoxs[compareIndex].classList.toggle("colorCompare");
 }
 
-// 자리 교체 O 아래로 내림
 function startChangePosition() {
   yPos += posNum;
 
-  if (yPos >= 100) { // 100 대신 바 길이 받아와야 함
+  if (yPos >= 100) {
     cancelAnimationFrame(animationId);
     return;
   }
 
-  element3.style.transform = `translateY(${yPos}px)`;
+  element3.style.transform = `translate(${xPos}px, ${yPos}px)`;
   animationId = requestAnimationFrame(startChangePosition);
-  // 현재 인덱스가 가리키는 DOM 요소, 바 길이
+
 }
 
-// 현재 인덱스 좌로 이동
 function searchPosition() {
   xPos -= posNum;
-
-  if (xPos <= -80) { // 100 대신 바 길이 받아와야 함
+  
+  if (xPos <= -80) {
     cancelAnimationFrame(animationId);
     return;
   }
-
-  element3.style.transform = `translateX(${xPos}px)`;
+  
+  element3.style.transform = `translate(${xPos}px, ${yPos}px)`;
   animationId = requestAnimationFrame(searchPosition);
 }
 
-// 비교 인덱스 우로 이동
-function moveRight() {
-  xPos += posNum;
 
-  if (xPos >= 80) { // 100 대신 바 길이 받아와야 함
+function fixPosition() {
+  yPos -= posNum;
+
+  if (yPos < -1) {
     cancelAnimationFrame(animationId);
     return;
   }
 
-  element3.style.transform = `translateX(${xPos}px)`;
+  element3.style.transform = `translate(${xPos}px, ${yPos}px)`;
+  animationId = requestAnimationFrame(fixPosition);
+}
+
+function moveRight() {
+  xPos += posNum;
+
+  if (xPos >= 80) {
+    cancelAnimationFrame(animationId);
+    return;
+  }
+
+  element3.style.transform = `translate(${xPos}px, ${yPos}px)`;
   animationId = requestAnimationFrame(moveRight);
 }
 
-document.getElementById("testButton").addEventListener("click", function() {
+document.getElementById("testButton").addEventListener("click", function () {
   if (!animationId) {
-    requestAnimationFrame(fixPosition);
+    requestAnimationFrame(startChangePosition);
   }
 });
-
