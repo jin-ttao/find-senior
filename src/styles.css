@@ -1,5 +1,9 @@
 @import "./reset.css";
 
+html, body {
+    height: 100vh;
+}
+
 body {
     margin: 50px;
 }
@@ -12,24 +16,55 @@ h1 {
     font-size: 40px;
 }
 
-#userInput {
-    display: flex;
-    gap: 20px;
-}
-
 main {
-    margin-top: 50px;
     display: flex;
     justify-content: center;
+    height: 100px;
+    margin-top: 50px;
     gap: 50px;
-}
-
-.user-info > p {
-    font-size: 15px;
-    padding: 10px;
     border: 1px solid;
 }
 
-.user-info {
-    font-size: 15px;
+.graph {
+    width: 20px;
+    background-color: black;
+}
+
+#graphBox1 {
+    width: 30px;
+    height: 50px;
+}
+
+#graphBox2 {
+    width: 30px;
+    height: 90px;
+}
+
+#graphBox3 {
+    width: 30px;
+    height: 70px; 
+
+}
+
+#graphBox4 {
+    width: 30px;
+    height: 10px;
+
+}
+
+#graphBox5 {
+    width: 30px;
+    height: 20px;
+}
+
+.colorDefault {
+    background-color: black;
+}
+
+.colorCurrent {
+    background-color: red;
+}
+
+.colorCompare {
+    background-color: green;
 }
