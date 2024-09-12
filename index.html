@@ -3,50 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>연장자 퍼스트</title>
-    <link rel="stylesheet" href="./styles.css">
+    <title>Insertion Sort Simulation</title>
+    <link rel="stylesheet" href="src/styles.css">
 </head>
 <body>
     <header>
-        <h1>안녕하세요</h1>
-        <p>5명의 정보를 입력하시면 정렬이 시작돼요!</p>
+        <h1>Insertion Sort Simulation</h1>
     </header>
-    <section id="userInput">
-        <label>성함:
-            <input type="text" id="userName">
-        </label>
-        <label>생년월일:
-            <input type="date" id="birthDate" name="birth-date" min="1980-01-01" max="9999-12-31" />
-        </label>
-        <button id="user">입력</button>
-        <input type="submit">
+    <section id="userInputArea">
+        <input type="text" id="userInputNumbers">
+        <input type="submit" id="userInputNumbersButton">
+        <button id="testButton">test</button>
     </section>
     <main>
-        <div class="user-info">
-            <p>김수한</p>
-            <p>1999-07-21</p>
-            <img src="src/human.svg">
-        </div>
-        <div class="user-info">
-            <p>송수한</p>
-            <p>1999-07-21</p>
-            <img src="src/human.svg">
-        </div>
-        <div class="user-info">
-            <p>정수한</p>
-            <p>1999-07-21</p>
-            <img src="src/human.svg">
-        </div>
-        <div class="user-info">
-            <p>제갈수한</p>
-            <p>1999-07-21</p>
-            <img src="src/human.svg">
-        </div>
-        <div class="user-info">
-            <p>수수한</p>
-            <p>1999-07-21</p>
-            <img src="src/human.svg">
-        </div>
+        <div class= "graphBox" id="graphBoxA"></div>
+        <div class= "graphBox" id="graphBoxB"></div>
+        <div class= "graphBox" id="graphBoxC"></div>
+        <div class= "graphBox" id="graphBoxD"></div>
+        <div class= "graphBox" id="graphBoxE"></div>
+        <!-- <div class= "graphBox boxColor" id="graphBox1"></div>
+        <div class= "graphBox boxColor" id="graphBox2"></div>
+        <div class= "graphBox boxColor" id="graphBox3"></div>
+        <div class= "graphBox boxColor" id="graphBox4"></div>
+        <div class= "graphBox boxColor" id="graphBox5"></div> -->
     </main>
+    <script src="./src/app.js"></script>
 </body>
 </html>
