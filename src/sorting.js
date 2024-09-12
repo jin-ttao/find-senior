@@ -6,23 +6,24 @@
  * @returns {array} 오름차순으로 정렬된 숫자의 배열
  */
 export async function sortArray(array) {
-  const sortedArray = array;
-  for (let currentIndex = 1; currentIndex < sortedArray.length; currentIndex++) {
-      const currentVacoPeople = sortedArray[currentIndex];
-      let compareIndex = currentIndex - 1;
-      await highlightBar(currentIndex, "on");
+  const sortedArray = array.map((number, index) => Object({"number": number, "domIndex": index + 1}));
 
-      while ((compareIndex >= 0) && (sortedArray[compareIndex] > currentVacoPeople)) {
+  for (let currentIndex = 1; currentIndex < sortedArray.length; currentIndex++) {
+      const currentNumber = sortedArray[currentIndex];
+      let compareIndex = currentIndex - 1;
+      await highlightBar(sortedArray[currentIndex].domIndex, "on");
+
+      while ((compareIndex >= 0) && (sortedArray[compareIndex].number > currentNumber.number)) {
+        await highlightBar(sortedArray[compareIndex].domIndex, "on");
+        await switchBar(currentNumber.domIndex, sortedArray[compareIndex].domIndex);
+        await highlightBar(sortedArray[compareIndex].domIndex, "off");
         sortedArray[compareIndex + 1] = sortedArray[compareIndex];
-        await highlightBar(compareIndex, "on");
-        await switchBar(currentIndex, compareIndex);
-        await highlightBar(compareIndex, "off");
         compareIndex--;
       }
-      sortedArray[compareIndex + 1] = currentVacoPeople;
-      await highlightBar(currentIndex, "off");
+      await highlightBar(currentNumber.domIndex, "off");
+      sortedArray[compareIndex + 1] = currentNumber;
   }
-  return sortedArray;
+  return sortedArray.map(object => object.number);
 }
 
 /**
@@ -32,17 +33,17 @@ export async function sortArray(array) {
 * @param {number} currentIndex 
 * @param {number} compareIndex 
 */
-function switchBar(currentIndex, compareIndex) {
-  sleep(1000);
-  console.log("현재 바:", currentIndex, "바꿀 바:", compareIndex);
+function switchBar(currentDomIndex, compareDomIndex) {
+  sleep(500);
+  console.log("현재 바:", currentDomIndex, "바꿀 바:", compareDomIndex);
 }
 
-function highlightBar(index, mode) {
-  sleep(1000);
+function highlightBar(domIndex, mode) {
+  sleep(500);
   if (mode === "on") {
-    console.log("하이라이트된 바:", index);
+    console.log("하이라이트된 바:", domIndex);
   } else if (mode === "off") {
-    console.log("하이라이트가 종료 된 바:", index);
+    console.log("하이라이트가 종료 된 바:", domIndex);
   }
   
 }
