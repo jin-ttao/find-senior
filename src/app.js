@@ -35,6 +35,7 @@ const renderNumberGraph = function (array) {
 };
 
 const startChangePosition = async function (currentTargetObject) {
+  console.log("current 아래로 내려감 - startChangePosition");
   currentTargetObject.yPos += PX_PER_MOVE;
 
   // console.log('start ', currentTargetObject.yPos);
@@ -42,15 +43,17 @@ const startChangePosition = async function (currentTargetObject) {
     cancelAnimationFrame(animationId);
     return;
   }
-
+  console.log("#1 startChangePosition");
   graphBoxArr[currentTargetObject.domIndex].style.transform = `translate(${currentTargetObject.xPos}px, ${currentTargetObject.yPos}px)`;
   animationId = requestAnimationFrame(()=> startChangePosition(currentTargetObject));
+  console.log("#2 startChangePosition");
 };
 
 const searchPosition = async function (currentTargetObject) {
+  console.log("current 좌로 감 - searchPosition");
   currentTargetObject.xPos -= PX_PER_MOVE;
 
-  console.log('search ', currentTargetObject.yPos, currentTargetObject.xPos, PX_PER_MOVE);
+  // console.log('search ', currentTargetObject.yPos, currentTargetObject.xPos, PX_PER_MOVE);
   if (currentTargetObject.xPos <= -80) {
     cancelAnimationFrame(animationId);
     return;
@@ -61,6 +64,7 @@ const searchPosition = async function (currentTargetObject) {
 };
 
 const fixPosition = async function (currentTargetObject) {
+  console.log("current 위로 올라감 - fixPosition");
   currentTargetObject.yPos += PX_PER_MOVE;
 
   if (currentTargetObject.yPos < -1) {
@@ -73,9 +77,8 @@ const fixPosition = async function (currentTargetObject) {
 };
 
 const moveRight = async function (compareTargetObject) {
-  console.log("1 compareTargetObject.xPos", compareTargetObject.xPos);
+  console.log("compare 오른쪽으로 뺌 - moveRight");
   compareTargetObject.xPos += PX_PER_MOVE;
-  console.log("2 compareTargetObject.xPos", compareTargetObject.xPos);
 
   if (compareTargetObject.xPos >= 80) {
     cancelAnimationFrame(animationId);
@@ -117,28 +120,42 @@ const sortArray = async function (array) {
       let isFixed = true;
 
       checkTargets(currentNumberObject.domIndex, sortedArray[compareIndex].domIndex);
+      console.log("sort-currentNumberObject", currentNumberObject);
 
       while ((compareIndex >= 0) && (sortedArray[compareIndex].number > currentNumberObject.number)) {
         if (isFixed === true) {
+          console.log("await startChangePosition 시작");
           await startChangePosition(currentNumberObject);
+          // console.log("await startChangePosition 끝");
+          // console.log(startChangePosition(currentNumberObject));
+          // await new Promise(requestAnimationFrame(()=> startChangePosition(currentNumberObject)));
         }
         
         if (isFixed === false) {
           checkTargets(currentNumberObject.domIndex, sortedArray[compareIndex].domIndex, isFixed);
         }
-        console.log("compareIndex", compareIndex);
-        console.log("sortedArray[compareIndex]", sortedArray[compareIndex]);
-        await moveRight(sortedArray[compareIndex]);
-        await searchPosition(currentNumberObject);
+        console.log("compareIndex", compareIndex); // compareIndex 0
+        console.log("sortedArray[compareIndex]", sortedArray[compareIndex]); // {number: 90, domIndex: 0, xPos: 0, yPos: 0}
+        console.log("await moveRight 시작");
+        await requestAnimationFrame(() => moveRight(sortedArray[compareIndex]));
+        console.log("await moveRight 끝");
+        // await moveRight(sortedArray[compareIndex]);
+        await requestAnimationFrame(() => searchPosition(currentNumberObject));
+        // await searchPosition(currentNumberObject);
 
         sortedArray[compareIndex + 1] = sortedArray[compareIndex];
         compareIndex--;
         
         isFixed = false;
       }
-
+      // 음수로 내려가는 경우 임의 처리.
+      if (compareIndex < 0) {
+        compareIndex = 0;
+      }
+      // console.log("#", currentNumberObject.domIndex);
+      // console.log("##sortedArray[compareIndex]", sortedArray[compareIndex]);
       checkTargets(currentNumberObject.domIndex, sortedArray[compareIndex].domIndex);
-
+      
       sortedArray[compareIndex + 1] = currentNumberObject;
 
       if (compareIndex + 1 !== currentIndex) {
@@ -146,6 +163,8 @@ const sortArray = async function (array) {
       }
 
   }
+  console.log("알고리즘 종료");
+  console.log("결과", sortedArray);
   return sortedArray.map(object => object.number);
 };
 
