@@ -26,11 +26,18 @@ main {
 }
 
 .graph {
-    width: 20px;
+    width: 30px;
     background-color: black;
 }
 
-.bar-highlight {
-    border: 2p solid;
-    border-color: blue;
+.colorDefault {
+    background-color: black;
+}
+
+.colorCurrent {
+    background-color: red;
+}
+
+.colorCompare {
+    background-color: green;
 }
