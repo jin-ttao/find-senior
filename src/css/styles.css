@@ -28,16 +28,20 @@ main {
 .graph {
     width: 30px;
     background-color: black;
+    transition: 0.5s;
 }
 
 .colorDefault {
     background-color: black;
+    transition: 0.5s;
 }
 
 .colorCurrent {
     background-color: red;
+    transition: 0.5s;
 }
 
 .colorCompare {
     background-color: green;
+    transition: 0.5s;
 }

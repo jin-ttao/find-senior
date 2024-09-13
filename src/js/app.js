@@ -18,19 +18,25 @@ const saveNumbers = function () {
 
     if (isAllNumber) {
         renderNumberGraph(numbersArr);
+        sortArray(numbersArr);
     } else {
         inputNumbers.value = null;
     }
 };
 
 const renderNumberGraph = function (array) {
-    array.forEach((number, index) => {
+    const main = document.querySelector("main");
+    array.forEach((number) => {
         const graphNew = document.createElement("div");
         graphNew.classList.add("graph", "colorDefault");
         graphNew.style.height = number + "px";
-        graphBoxs[index].appendChild(graphNew);
+
+        const graphBox = document.createElement("div");
+        graphBox.classList.add("graphBox");
+
+        graphBox.appendChild(graphNew);
+        main.appendChild(graphBox);
     });
 };
 
 inputNumbersButton.addEventListener("click", saveNumbers);
-testButton.addEventListener("click", () => sortArray(numbersArr));

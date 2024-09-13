@@ -1,5 +1,4 @@
-const graphBoxs = document.querySelectorAll(".graphBox");
-const graphBoxArr = Array.from(graphBoxs);
+
 const PX_PER_MOVE = 2;
 
 export const startChangePosition = function (currentTargetObject) {
@@ -9,7 +8,7 @@ export const startChangePosition = function (currentTargetObject) {
         resolve();
       } else {
         currentTargetObject.yPos += PX_PER_MOVE;
-        graphBoxArr[currentTargetObject.domIndex].style.transform = `translate(${currentTargetObject.xPos}px, ${currentTargetObject.yPos}px)`;
+        currentTargetObject.domGraphBox.style.transform = `translate(${currentTargetObject.xPos}px, ${currentTargetObject.yPos}px)`;
         requestAnimationFrame(startChangePosition1);
       }
     }
@@ -26,7 +25,7 @@ export const searchPosition = function (currentTargetObject) {
         resolve();
       } else {
         currentTargetObject.xPos -= PX_PER_MOVE;
-        graphBoxArr[currentTargetObject.domIndex].style.transform = `translate(${currentTargetObject.xPos}px, ${currentTargetObject.yPos}px)`;
+        currentTargetObject.domGraphBox.style.transform = `translate(${currentTargetObject.xPos}px, ${currentTargetObject.yPos}px)`;
         requestAnimationFrame(searchPosition1);
       }
     }
@@ -41,7 +40,7 @@ export const fixPosition = function (currentTargetObject) {
         resolve();
       } else {
         currentTargetObject.yPos -= PX_PER_MOVE;
-        graphBoxArr[currentTargetObject.domIndex].style.transform = `translate(${currentTargetObject.xPos}px, ${currentTargetObject.yPos}px)`;
+        currentTargetObject.domGraphBox.style.transform = `translate(${currentTargetObject.xPos}px, ${currentTargetObject.yPos}px)`;
         requestAnimationFrame(fixPosition1);
       }
     }
@@ -49,7 +48,7 @@ export const fixPosition = function (currentTargetObject) {
   })
 };
 
-export const moveRight = async function (compareTargetObject) {
+export const moveRight = function (compareTargetObject) {
   return new Promise ((resolve) => {
     let xPos = 0;
     function moveRight1() {
@@ -58,7 +57,7 @@ export const moveRight = async function (compareTargetObject) {
       } else {  
         xPos += PX_PER_MOVE;
         compareTargetObject.xPos += PX_PER_MOVE;
-        graphBoxArr[compareTargetObject.domIndex].style.transform = `translate(${compareTargetObject.xPos}px, ${compareTargetObject.yPos}px)`;
+        compareTargetObject.domGraphBox.style.transform = `translate(${compareTargetObject.xPos}px, ${compareTargetObject.yPos}px)`;
         requestAnimationFrame(moveRight1);
       }
     }
@@ -66,18 +65,19 @@ export const moveRight = async function (compareTargetObject) {
   })
 };
 
-export const checkTargets = function (currentIndex, compareIndex, isFixed) {
+export const checkTargets = function (currentIndex, compareIndex, abc,  isFixed) {
   const graphs = document.querySelectorAll(".graph");
   const currentGraph = graphs[currentIndex].classList;
   const comparedGraph = graphs[compareIndex].classList;
-  const preComparedGraph = graphs[compareIndex + 1].classList;
-
+  
   if (isFixed === false) {
+    const preComparedGraph = graphs[abc].classList;
     preComparedGraph.toggle("colorCompare");
     preComparedGraph.toggle("colorDefault");
   
     comparedGraph.toggle("colorCompare");
     comparedGraph.toggle("colorDefault");
+    return;
   }
 
   currentGraph.toggle("colorDefault");
