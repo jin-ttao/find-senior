@@ -16,6 +16,24 @@ h1 {
     font-size: 40px;
 }
 
+#userInputNumbers {
+    text-align: center;
+}
+
+#userInputNumbersButton {
+    text-align: center;
+}
+
+#messageForUser {
+    margin-top: 10px;
+    height: 20px;
+}
+
+#messageForUserText {
+    color: red;
+    font-size: 15px;
+}
+
 main {
     display: flex;
     justify-content: center;
@@ -47,5 +65,4 @@ main {
 
 .colorCompare {
     background-color: green;
-    transition: 0.5s;
 }

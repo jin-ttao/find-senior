@@ -4,10 +4,11 @@ const inputNumbers = document.querySelector("#userInputNumbers");
 const inputNumbersButton = document.querySelector("#userInputNumbersButton");
 const testButton = document.getElementById("testButton");
 const graphBoxs = document.querySelectorAll(".graphBox");
+const messageForUserText = document.querySelector("#messageForUserText");
 
 let numbersArr = [];
 
-const saveNumbers = async function () {
+const saveNumbers = function () {
     numbersArr = inputNumbers.value.split(',').map((num) => {
         return parseInt(num.trim(), 10);
     });
@@ -17,27 +18,29 @@ const saveNumbers = async function () {
     });
 
     if (isAllNumber) {
-        inputNumbersButton.removeEventListener("click", saveNumbers);
+        messageForUserText.remove();
         renderNumberGraph(numbersArr);
-        await sortArray(numbersArr);
-        inputNumbersButton.addEventListener("click", saveNumbers);
+        sortArray(numbersArr);
     } else {
         inputNumbers.value = null;
+        messageForUserText.textContent = "숫자를 입력해 주세요.";
     }
 };
 
 const renderNumberGraph = function (array) {
     const main = document.querySelector("main");
-    const bigInput = Math.max(...array);
-    main.innerHTML = '';
     array.forEach((number) => {
         const graphNew = document.createElement("div");
+        const graphValue = document.createElement("p");
         graphNew.classList.add("graph", "colorDefault");
-        graphNew.style.height = (number/bigInput)*100 + "%";
+        graphValue.classList.add("graph-value");
+        graphNew.style.height = number + "px";
+        graphValue.textContent = number;
 
         const graphBox = document.createElement("div");
         graphBox.classList.add("graphBox");
 
+        graphBox.appendChild(graphValue);
         graphBox.appendChild(graphNew);
         main.appendChild(graphBox);
     });
