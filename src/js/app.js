@@ -7,7 +7,7 @@ const graphBoxs = document.querySelectorAll(".graphBox");
 
 let numbersArr = [];
 
-const saveNumbers = function () {
+const saveNumbers = async function () {
     numbersArr = inputNumbers.value.split(',').map((num) => {
         return parseInt(num.trim(), 10);
     });
@@ -17,8 +17,10 @@ const saveNumbers = function () {
     });
 
     if (isAllNumber) {
+        inputNumbersButton.removeEventListener("click", saveNumbers);
         renderNumberGraph(numbersArr);
-        sortArray(numbersArr);
+        await sortArray(numbersArr);
+        inputNumbersButton.addEventListener("click", saveNumbers);
     } else {
         inputNumbers.value = null;
     }
@@ -26,6 +28,7 @@ const saveNumbers = function () {
 
 const renderNumberGraph = function (array) {
     const main = document.querySelector("main");
+    main.innerHTML = '';
     array.forEach((number) => {
         const graphNew = document.createElement("div");
         graphNew.classList.add("graph", "colorDefault");
