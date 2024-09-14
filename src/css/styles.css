@@ -26,7 +26,8 @@ main {
 }
 
 .graph {
-  width: 30px;
+    width: 30px;
+    transition: 0.5s;
 }
 
 .graphBox {
@@ -37,12 +38,15 @@ main {
 
 .colorDefault {
     background-color: black;
+    transition: 0.5s;
 }
 
 .colorCurrent {
     background-color: red;
+    transition: 0.5s;
 }
 
 .colorCompare {
     background-color: green;
+    transition: 0.5s;
 }
