@@ -1,4 +1,5 @@
-import {fixPosition, checkTargets, startChangePosition, moveRight, searchPosition} from "./animation.js"
+import { onSortingComplete, fixPosition, checkTargets, startChangePosition, moveRight, searchPosition } from "./animation.js"
+import { delay } from "./utils.js";
 
 /**
  * 입력 받은 숫자의 배열을 받아 오름차순으로 정렬하여 반환함.
@@ -9,8 +10,8 @@ import {fixPosition, checkTargets, startChangePosition, moveRight, searchPositio
  */
 export const sortArray = async function (array) {
     const graphBoxs = document.querySelectorAll(".graphBox");
-    const graph = document.querySelectorAll(".graph");
-    const sortedArray = array.map((number, index) => Object({"number": number, "domIndex": index, "domGraphBox": graphBoxs[index], "domGraph": graph[index], "xPos": 0, "yPos": 0, }));
+    const graphs = document.querySelectorAll(".graph");
+    const sortedArray = array.map((number, index) => Object({"number": number, "domIndex": index, "domGraphBox": graphBoxs[index], "domGraph": graphs[index], "xPos": 0, "yPos": 0, }));
   
     for (let currentIndex = 1; currentIndex < sortedArray.length; currentIndex++) {
         const currentNumberObject = sortedArray[currentIndex];
@@ -55,13 +56,6 @@ export const sortArray = async function (array) {
         }
   
     }
-    console.log("end");
+    await onSortingComplete(graphs);
     return sortedArray.map(object => object.number);
   };
-
-
-function delay(ms) {
-  return new Promise((resolve) => setTimeout(() => {
-    resolve();
-  }, ms));
-}

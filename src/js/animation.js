@@ -1,3 +1,4 @@
+import { delay } from "./utils.js";
 
 const PX_PER_MOVE = 2;
 
@@ -86,3 +87,18 @@ export const checkTargets = function (currentIndex, compareIndex, abc,  isFixed)
   comparedGraph.toggle("colorDefault");
   comparedGraph.toggle("colorCompare");
 };
+
+export const onSortingComplete = function (nodeArray) {
+  return new Promise ((resolve) => {
+    nodeArray.forEach(async element => {
+      element.classList.toggle("colorCompare");
+      element.classList.toggle("colorDefault");
+      await delay(500);
+      element.classList.toggle("colorCompare");
+      element.classList.toggle("colorDefault");
+      await delay(500);
+      resolve();
+    });
+  })
+  
+}
