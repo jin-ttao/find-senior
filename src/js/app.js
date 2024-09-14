@@ -28,11 +28,12 @@ const saveNumbers = async function () {
 
 const renderNumberGraph = function (array) {
     const main = document.querySelector("main");
+    const bigInput = Math.max(...array);
     main.innerHTML = '';
     array.forEach((number) => {
         const graphNew = document.createElement("div");
         graphNew.classList.add("graph", "colorDefault");
-        graphNew.style.height = number + "px";
+        graphNew.style.height = (number/bigInput)*100 + "%";
 
         const graphBox = document.createElement("div");
         graphBox.classList.add("graphBox");

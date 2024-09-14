@@ -26,9 +26,13 @@ main {
 }
 
 .graph {
-    width: 30px;
-    background-color: black;
-    transition: 0.5s;
+  width: 30px;
+}
+
+.graphBox {
+  display: flex;
+  height: 100px;
+  align-items: flex-end;
 }
 
 .colorDefault {

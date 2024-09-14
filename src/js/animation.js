@@ -100,5 +100,4 @@ export const onSortingComplete = function (nodeArray) {
       resolve();
     });
   })
-  
-}
+};

@@ -12,7 +12,8 @@ export const sortArray = async function (array) {
     const graphBoxs = document.querySelectorAll(".graphBox");
     const graphs = document.querySelectorAll(".graph");
     const sortedArray = array.map((number, index) => Object({"number": number, "domIndex": index, "domGraphBox": graphBoxs[index], "domGraph": graphs[index], "xPos": 0, "yPos": 0, }));
-  
+
+    await delay(500);
     for (let currentIndex = 1; currentIndex < sortedArray.length; currentIndex++) {
         const currentNumberObject = sortedArray[currentIndex];
         let compareIndex = currentIndex - 1;
@@ -46,15 +47,14 @@ export const sortArray = async function (array) {
           tempCompareIndex --;
         }
         
+        if (compareIndex + 1 !== currentIndex) {
+          await fixPosition(currentNumberObject);
+        }
+
         checkTargets(currentNumberObject.domIndex, sortedArray[tempCompareIndex+1].domIndex);
         await delay(500);
   
         sortedArray[compareIndex + 1] = currentNumberObject;
-  
-        if (compareIndex + 1 !== currentIndex) {
-          await fixPosition(currentNumberObject);
-        }
-  
     }
     await onSortingComplete(graphs);
     return sortedArray.map(object => object.number);
