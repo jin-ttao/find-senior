@@ -1,27 +1,35 @@
 @import "./reset.css";
 
 html, body {
-    height: 100vh;
+  height: 100vh;
 }
 
 body {
-    margin: 50px;
+  margin: 50px;
 }
 
 header {
-    padding: 20px 0;
+  padding: 20px 0;
 }
 
 h1 {
-    font-size: 40px;
+  font-size: 40px;
 }
 
 #userInputNumbers {
+  width: 120px;
+  height: 15px;
   text-align: center;
 }
 
 #userInputNumbersButton {
   text-align: center;
+  background: #2F3545;
+  border-color: #2F3545;
+  color: azure;
+  width: 120px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 #messageForUser {
@@ -34,12 +42,12 @@ h1 {
 }
 
 #graphArea {
-    display: flex;
-    justify-content: center;
-    height: 250px;
-    margin-top: 50px;
-    gap: 50px;
-    border-bottom: 1px solid;
+  display: flex;
+  justify-content: center;
+  height: 250px;
+  margin-top: 50px;
+  gap: 50px;
+  border-bottom: 1px solid;
 }
 
 .graph {
@@ -53,17 +61,17 @@ h1 {
 }
 
 .colorDefault {
-    background-color: black;
-    transition: 0.5s;
+  background-color: #2F3545;
+  transition: 0.5s;
 }
 
 .colorCurrent {
-    background-color: red;
-    transition: 0.5s;
+  background-color: red;
+  transition: 0.5s;
 }
 
 .colorCompare {
-  background-color: green;
+  background-color: rgb(69, 245, 166);
   transition: 0.5s;
 }
 

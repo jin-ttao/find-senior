@@ -17,7 +17,7 @@ export const startChangePosition = function (currentTargetObject) {
     }
 
     requestAnimationFrame(startChangePosition1);
-    });
+  });
 };
 
 export const searchPosition = function (currentTargetObject) {
@@ -37,7 +37,7 @@ export const searchPosition = function (currentTargetObject) {
 };
 
 export const fixPosition = function (currentTargetObject) {
-  return new Promise ((resolve) => {
+  return new Promise((resolve) => {
     function fixPosition1() {
       if (currentTargetObject.yPos <= 0) {
         resolve();
@@ -48,11 +48,11 @@ export const fixPosition = function (currentTargetObject) {
       }
     }
     requestAnimationFrame(fixPosition1);
-  })
+  });
 };
 
 export const moveRight = function (compareTargetObject) {
-  return new Promise ((resolve) => {
+  return new Promise((resolve) => {
     let xPos = 0;
     function moveRight1() {
       if (xPos >= 80) {
@@ -65,19 +65,19 @@ export const moveRight = function (compareTargetObject) {
       }
     }
     requestAnimationFrame(moveRight1);
-  })
+  });
 };
 
 export const checkTargets = function (currentIndex, compareIndex, abc,  isFixed) {
   const graphs = document.querySelectorAll(".graph");
   const currentGraph = graphs[currentIndex].classList;
   const comparedGraph = graphs[compareIndex].classList;
-  
+
   if (isFixed === false) {
     const preComparedGraph = graphs[abc].classList;
     preComparedGraph.toggle("colorCompare");
     preComparedGraph.toggle("colorDefault");
-  
+
     comparedGraph.toggle("colorCompare");
     comparedGraph.toggle("colorDefault");
     return;
@@ -85,7 +85,7 @@ export const checkTargets = function (currentIndex, compareIndex, abc,  isFixed)
 
   currentGraph.toggle("colorDefault");
   currentGraph.toggle("colorCurrent");
-  
+
   comparedGraph.toggle("colorDefault");
   comparedGraph.toggle("colorCompare");
 };

@@ -33,14 +33,14 @@ export const sortArray = async function (array) {
             await delay(500);
           }
 
-          await moveRight(sortedArray[compareIndex]);
-          await searchPosition(currentNumberObject);
-  
-          sortedArray[compareIndex + 1] = sortedArray[compareIndex];
-          compareIndex--;
-          
-          isFixed = false;
-        }
+      await moveRight(sortedArray[compareIndex]);
+      await searchPosition(currentNumberObject);
+
+      sortedArray[compareIndex + 1] = sortedArray[compareIndex];
+      compareIndex--;
+
+      isFixed = false;
+    }
 
         let tempCompareIndex = compareIndex
         if (isFixed) {
