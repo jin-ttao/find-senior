@@ -17,11 +17,19 @@ h1 {
 }
 
 #userInputNumbers {
+  width: 120px;
+  height: 15px;
   text-align: center;
 }
 
 #userInputNumbersButton {
   text-align: center;
+  background: #2F3545;
+  border-color: #2F3545;
+  color: azure;
+  width: 120px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 #messageForUser {
@@ -53,7 +61,7 @@ h1 {
 }
 
 .colorDefault {
-  background-color: black;
+  background-color: #2F3545;
   transition: 0.5s;
 }
 
@@ -62,8 +70,8 @@ h1 {
   transition: 0.5s;
 }
 
-.colorCompared {
-  background-color: green;
+.colorCompare {
+  background-color: rgb(69, 245, 166);
   transition: 0.5s;
 }
 

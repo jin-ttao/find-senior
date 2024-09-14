@@ -90,7 +90,7 @@ export const checkTargets = function (currentIndex, comparedIndex, preComparedIn
 
   currentGraph.toggle("colorDefault");
   currentGraph.toggle("colorCurrent");
-  
+
   comparedGraph.toggle("colorDefault");
   comparedGraph.toggle("colorCompared");
 };
