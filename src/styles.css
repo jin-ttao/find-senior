@@ -1,0 +1,51 @@
+@import "./reset.css";
+
+html, body {
+    height: 100vh;
+}
+
+body {
+    margin: 50px;
+}
+
+header {
+    padding: 20px 0;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    height: 100px;
+    margin-top: 50px;
+    gap: 50px;
+    border: 1px solid;
+}
+
+.graph {
+  width: 30px;
+}
+
+.graphBox {
+  display: flex;
+  height: 100px;
+  align-items: flex-end;
+}
+
+.colorDefault {
+    background-color: black;
+    transition: 0.5s;
+}
+
+.colorCurrent {
+    background-color: red;
+    transition: 0.5s;
+}
+
+.colorCompare {
+    background-color: green;
+    transition: 0.5s;
+}
