@@ -7,7 +7,7 @@ const messageForUserText = document.querySelector("#messageForUserText");
 
 let numbersArr = [];
 
-const saveNumbers = function () {
+const saveNumbers = async function () {
   numbersArr = inputNumbers.value.split(',').map((num) => {
     return parseInt(num.trim(), 10);
   });
@@ -17,33 +17,37 @@ const saveNumbers = function () {
   });
 
   if (isAllNumber) {
-    messageForUserText.remove();
+    messageForUserText.textContent="";
+    inputNumbersButton.removeEventListener("click", saveNumbers);
     renderNumberGraph(numbersArr);
-    sortArray(numbersArr);
+    await sortArray(numbersArr);
+    inputNumbersButton.addEventListener("click", saveNumbers);
   } else {
     inputNumbers.value = null;
+    messageForUserText.style.color = "red";
     messageForUserText.textContent = "숫자를 입력해 주세요.";
   }
 };
 
 const renderNumberGraph = function (array) {
-  const main = document.querySelector("main");
-  const bigInput = Math.max(...array);
+  const graphArea = document.querySelector("#graphArea");
 
+  graphArea.innerHTML = '';
   array.forEach((number) => {
     const graphNew = document.createElement("div");
     const graphValue = document.createElement("p");
+    const heightRatio = (number/(Math.max(...array)));
     graphNew.classList.add("graph", "colorDefault");
     graphValue.classList.add("graph-value");
-    graphNew.style.height = (number/bigInput)*100 + "%";
+    graphNew.style.height = (heightRatio * 250) + "px";
     graphValue.textContent = number;
 
     const graphBox = document.createElement("div");
     graphBox.classList.add("graphBox");
 
-    graphBox.appendChild(graphValue);
     graphBox.appendChild(graphNew);
-    main.appendChild(graphBox);
+    graphBox.appendChild(graphValue);
+    graphArea.appendChild(graphBox);
   });
 };
 
