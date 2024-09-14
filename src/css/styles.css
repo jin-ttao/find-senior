@@ -16,13 +16,30 @@ h1 {
     font-size: 40px;
 }
 
-main {
+#userInputNumbers {
+  text-align: center;
+}
+
+#userInputNumbersButton {
+  text-align: center;
+}
+
+#messageForUser {
+  margin-top: 10px;
+  height: 20px;
+}
+
+#messageForUserText {
+  font-size: 15px;
+}
+
+#graphArea {
     display: flex;
     justify-content: center;
-    height: 100px;
+    height: 250px;
     margin-top: 50px;
     gap: 50px;
-    border: 1px solid;
+    border-bottom: 1px solid;
 }
 
 .graph {
@@ -31,8 +48,8 @@ main {
 
 .graphBox {
   display: flex;
-  height: 100px;
-  align-items: flex-end;
+  height: 250px;
+  flex-direction: column-reverse;
 }
 
 .colorDefault {
@@ -46,6 +63,14 @@ main {
 }
 
 .colorCompare {
-    background-color: green;
-    transition: 0.5s;
+  background-color: green;
+  transition: 0.5s;
+}
+
+.graph-value {
+  color: black;
+  font-size: 12px;
+  font-weight: 1000;
+  text-align: center;
+  margin-bottom: 5px;
 }

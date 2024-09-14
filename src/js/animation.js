@@ -5,7 +5,9 @@ const PX_PER_MOVE = 2;
 export const startChangePosition = function (currentTargetObject) {
   return new Promise((resolve) => {
     function startChangePosition1() {
-      if (currentTargetObject.yPos >= 100) {
+      const heightOfTarget = parseInt(currentTargetObject.domGraph.style.height.slice(0, -2), 10);
+
+      if (currentTargetObject.yPos > heightOfTarget) {
         resolve();
       } else {
         currentTargetObject.yPos += PX_PER_MOVE;
@@ -55,7 +57,7 @@ export const moveRight = function (compareTargetObject) {
     function moveRight1() {
       if (xPos >= 80) {
         resolve();
-      } else {  
+      } else {
         xPos += PX_PER_MOVE;
         compareTargetObject.xPos += PX_PER_MOVE;
         compareTargetObject.domGraphBox.style.transform = `translate(${compareTargetObject.xPos}px, ${compareTargetObject.yPos}px)`;
@@ -88,16 +90,22 @@ export const checkTargets = function (currentIndex, compareIndex, abc,  isFixed)
   comparedGraph.toggle("colorCompare");
 };
 
-export const onSortingComplete = function (nodeArray) {
+export const endChangePosition = function (nodeArray) {
   return new Promise ((resolve) => {
     nodeArray.forEach(async element => {
+      const messageForUserText = document.querySelector("#messageForUserText");
+      messageForUserText.textContent = "Insertion 정렬 완료! 또 해보세요! 😃";
+      messageForUserText.style.color = "blue";
+
       element.classList.toggle("colorCompare");
       element.classList.toggle("colorDefault");
       await delay(500);
+
       element.classList.toggle("colorCompare");
       element.classList.toggle("colorDefault");
       await delay(500);
+
       resolve();
     });
-  })
+  });
 };

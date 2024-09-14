@@ -2,45 +2,53 @@ import { sortArray } from "./sorting.js";
 
 const inputNumbers = document.querySelector("#userInputNumbers");
 const inputNumbersButton = document.querySelector("#userInputNumbersButton");
-const testButton = document.getElementById("testButton");
 const graphBoxs = document.querySelectorAll(".graphBox");
+const messageForUserText = document.querySelector("#messageForUserText");
 
 let numbersArr = [];
 
 const saveNumbers = async function () {
-    numbersArr = inputNumbers.value.split(',').map((num) => {
-        return parseInt(num.trim(), 10);
-    });
+  numbersArr = inputNumbers.value.split(',').map((num) => {
+    return parseInt(num.trim(), 10);
+  });
 
-    const isAllNumber = numbersArr.every((num) => {
-        return typeof num === 'number' && !isNaN(num);
-    });
+  const isAllNumber = numbersArr.every((num) => {
+    return typeof num === 'number' && !isNaN(num);
+  });
 
-    if (isAllNumber) {
-        inputNumbersButton.removeEventListener("click", saveNumbers);
-        renderNumberGraph(numbersArr);
-        await sortArray(numbersArr);
-        inputNumbersButton.addEventListener("click", saveNumbers);
-    } else {
-        inputNumbers.value = null;
-    }
+  if (isAllNumber) {
+    messageForUserText.textContent="";
+    inputNumbersButton.removeEventListener("click", saveNumbers);
+    renderNumberGraph(numbersArr);
+    await sortArray(numbersArr);
+    inputNumbersButton.addEventListener("click", saveNumbers);
+  } else {
+    inputNumbers.value = null;
+    messageForUserText.style.color = "red";
+    messageForUserText.textContent = "숫자를 입력해 주세요.";
+  }
 };
 
 const renderNumberGraph = function (array) {
-    const main = document.querySelector("main");
-    const bigInput = Math.max(...array);
-    main.innerHTML = '';
-    array.forEach((number) => {
-        const graphNew = document.createElement("div");
-        graphNew.classList.add("graph", "colorDefault");
-        graphNew.style.height = (number/bigInput)*100 + "%";
+  const graphArea = document.querySelector("#graphArea");
 
-        const graphBox = document.createElement("div");
-        graphBox.classList.add("graphBox");
+  graphArea.innerHTML = '';
+  array.forEach((number) => {
+    const graphNew = document.createElement("div");
+    const graphValue = document.createElement("p");
+    const heightRatio = (number/(Math.max(...array)));
+    graphNew.classList.add("graph", "colorDefault");
+    graphValue.classList.add("graph-value");
+    graphNew.style.height = (heightRatio * 250) + "px";
+    graphValue.textContent = number;
 
-        graphBox.appendChild(graphNew);
-        main.appendChild(graphBox);
-    });
+    const graphBox = document.createElement("div");
+    graphBox.classList.add("graphBox");
+
+    graphBox.appendChild(graphNew);
+    graphBox.appendChild(graphValue);
+    graphArea.appendChild(graphBox);
+  });
 };
 
 inputNumbersButton.addEventListener("click", saveNumbers);

@@ -1,4 +1,4 @@
-import { onSortingComplete, fixPosition, checkTargets, startChangePosition, moveRight, searchPosition } from "./animation.js"
+import { endChangePosition, fixPosition, checkTargets, startChangePosition, moveRight, searchPosition } from "./animation.js"
 import { delay } from "./utils.js";
 
 /**
@@ -56,6 +56,6 @@ export const sortArray = async function (array) {
   
         sortedArray[compareIndex + 1] = currentNumberObject;
     }
-    await onSortingComplete(graphs);
+    await endChangePosition(graphs);
     return sortedArray.map(object => object.number);
   };
