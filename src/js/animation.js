@@ -18,7 +18,7 @@ export const startChangePosition = function (currentTargetObject) {
     }
 
     requestAnimationFrame(innerStartChangePosition);
-    });
+  });
 };
 
 export const searchPosition = function (currentTargetObject) {
@@ -51,17 +51,16 @@ export const fixPosition = function (currentTargetObject) {
       }
     }
     requestAnimationFrame(innerFixPosition);
-  })
+  });
 };
 
 export const moveRight = function (comparedTargetObject) {
   return new Promise ((resolve) => {
-    let xPosForStopPosition = 0;
+    const xPosOfComparedTarget = comparedTargetObject.xPos;
     function innerMoveRight() {
-      if (xPosForStopPosition >= 80) {
+      if (comparedTargetObject.xPos >= 80 + xPosOfComparedTarget) {
         resolve();
       } else {
-        xPosForStopPosition += PX_PER_MOVE;
         comparedTargetObject.xPos += PX_PER_MOVE;
         comparedTargetObject.domGraphBox.style.transform = `translate(${comparedTargetObject.xPos}px, ${comparedTargetObject.yPos}px)`;
 
@@ -69,7 +68,7 @@ export const moveRight = function (comparedTargetObject) {
       }
     }
     requestAnimationFrame(innerMoveRight);
-  })
+  });
 };
 
 export const checkTargets = function (currentIndex, comparedIndex, preComparedIndex, isFixed) {
