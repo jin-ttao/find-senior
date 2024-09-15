@@ -19,6 +19,7 @@ h1 {
 #userInputNumbers {
   width: 120px;
   height: 15px;
+  font-size: 10px;
   text-align: center;
 }
 
@@ -70,7 +71,7 @@ h1 {
   transition: 0.5s;
 }
 
-.colorCompare {
+.colorCompared {
   background-color: rgb(69, 245, 166);
   transition: 0.5s;
 }
